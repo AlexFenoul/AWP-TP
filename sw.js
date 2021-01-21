@@ -2,7 +2,7 @@ importScripts("./service_worker/install.js");
 importScripts("./service_worker/activate.js"); 
 importScripts("./service_worker/fetch.js"); 
 
-const cacheName = "galerie-v1";
+const cacheName = "AWP-TP-V1";
 
 const files = [
   "/",

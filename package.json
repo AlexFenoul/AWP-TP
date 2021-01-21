@@ -1,5 +1,5 @@
 {
-  "name": "galerie",
+  "name": "awp-tp",
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DavyEllembeng/Galerie.git"
+    "url": "git+https://github.com/AlexFenoul/AWP-TP.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DavyEllembeng/Galerie/issues"
+    "url": "https://github.com/AlexFenoul/AWP-TP/issues"
   },
-  "homepage": "https://github.com/DavyEllembeng/Galerie#readme",
+  "homepage": "https://github.com/AlexFenoul/AWP-TP#readme",
   "devDependencies": {
     "copy-webpack-plugin": "^7.0.0",
     "html-webpack-plugin": "^4.5.1",

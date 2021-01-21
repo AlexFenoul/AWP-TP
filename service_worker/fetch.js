@@ -5,7 +5,7 @@ self.addEventListener("fetch", event => {
 self.addEventListener("fetch", (event) => {
   const url = event.request.url;
 
-  if (url.indexOf("https://nostalgic-lamarr-5a666c.netlify.app/images.json") === 0) {
+  if (url.indexOf("./images.json") === 0) {
     event.respondWith(
       fetch(event.request).then((response) => {
         if(response.status !== 200) {

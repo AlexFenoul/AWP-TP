@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let fetchData;
 	if (navigator.onLine) {
-		fetchData = fetch("https://nostalgic-lamarr-5a666c.netlify.app/images.json")
+		fetchData = fetch("./images.json")
 		  .then((response) => response.json())
 		  .then((data) => localforage.setItem("data", data));
 	} 
