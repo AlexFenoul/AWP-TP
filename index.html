@@ -37,11 +37,11 @@
           .catch((error) => {
             console.error(error);
           });
+          
       } else {
         console.warn("Service workers are not supported.");
       }
     </script>
-
     <script src="./script.js"></script>
   </head>
   <body>
@@ -50,8 +50,37 @@
     </div>
 	<button id="boutton" class="button">
       Installer
-    </button>
+  </button>
+  <button onclick="registerNotification()"> Notify me when there are new attendees</button>
     <h1 class="title">Galerie</h1>
     <div class="container"></div>
   </body>
 </html>
+
+
+<script>
+  function registerNotification() {
+    console.log("notification...");
+    if (!('Notification' in window)) {
+      alert('Ce navigateur ne prend pas en charge la notification de bureau')
+    }
+    else {
+      Notification.requestPermission(permission => {
+        if (permission === "granted") {
+          registerBackgroundSync();
+        } else console.error("Permission was not granted.");
+      });
+    }
+  }
+
+  function registerBackgroundSync() {
+  if (!navigator.serviceWorker) {
+    return console.error("Service Worker not supported");
+  }
+
+  navigator.serviceWorker.ready
+    .then(registration => registration.sync.register("syncAttendees"))
+    .then(() => console.log("Registered background sync"))
+    .catch(err => console.error("Error registering background sync", err));
+  }
+</script>

@@ -49,3 +49,21 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
+self.addEventListener("sync", function(event) {
+  console.log("sync event", event);
+  if (event.tag === "syncAttendees") {
+    event.waitUntil(syncAttendees()); // on lance la requête de synchronisation
+  }
+});
+
+function syncAttendees() {
+  // todo url de notre serveur NodeJS
+  return update({ url: `https://reqres.in/api/users` })
+    .then(refresh)
+    .then(attendees =>
+      self.registration.showNotification(
+        `${attendees.length} attendees to the PWA Workshop`
+      )
+    );
+}
