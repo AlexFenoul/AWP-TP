@@ -12,6 +12,7 @@ function reduireArray(array, size) {
 const dateTimeFormat = Intl.DateTimeFormat("fr");
 
 function afficher(json){
+  console.log(json)
 	const selections = reduireArray(json, 4);
 
   let html = "";
