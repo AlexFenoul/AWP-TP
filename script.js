@@ -65,9 +65,19 @@ function afficher(json){
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  fetch("./images.json")
-    .then((response) => response.json())
-    .then((json) => afficher(json));  
+  var myHeaders = new Headers(); 
+  myHeaders.append("Authorization", localforage.getItem("token") );
+  myHeaders.append("Content-Type", "application/json");
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };  
+
+  fetch("http://localhost:8080/image", requestOptions)
+  .then((response) => response.json())
+  .then((json) => afficher(json)); 
 });
 
 window.addEventListener('beforeinstallprompt', e => { 
@@ -133,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	else {
 		fetchData = localforage.getItem("data");
 	}
-	// fetchData.then((json) => afficher(json));
+	fetchData.then((json) => afficher(json));
 });
 
 function registerBackgroundSync() {
