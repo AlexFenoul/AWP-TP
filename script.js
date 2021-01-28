@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       redirect: 'follow'
     };  
 
-		fetchData = fetch("localhost:8080/images", requestOptions)
+		fetchData = fetch("localhost:8080/image", requestOptions)
 		  .then((response) => response.json())
 		  .then((data) => {
         console.log(data)
