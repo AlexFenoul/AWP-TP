@@ -17,11 +17,12 @@ function login(){
     };
   
     fetch("http://localhost:8080/auth/login", requestOptions)
-      .then(response => response.text())
+      .then(response => response.json())
       .then((data) => {
         localforage.setItem("token", data.access_token)
         window.location.replace("https://awp-tp.netlify.app/");
-      })
-      .catch(error => console.log('error', error));
+      }   
+    )
+    .catch(error => console.log('error', error));
   }
   (data) => localforage.setItem("data", data)
