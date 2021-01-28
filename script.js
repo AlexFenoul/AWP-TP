@@ -137,15 +137,15 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchData = fetch("http://localhost:8080/image", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         localforage.setItem("data", data)
+	      fetchData.then((json) => afficher(json));
       });
     });
 	} 
 	else {
-		fetchData = localforage.getItem("data");
+    fetchData = localforage.getItem("data");
+	  fetchData.then((json) => afficher(json));
 	}
-	fetchData.then((json) => afficher(json));
 });
 
 function registerBackgroundSync() {
