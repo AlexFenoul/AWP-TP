@@ -135,11 +135,11 @@ document.addEventListener("DOMContentLoaded", function () {
         redirect: 'follow'
       };  
       
-      fetchData = fetch("http://localhost:8080/image", requestOptions)
+      fetch("http://localhost:8080/image", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         localforage.setItem("data", data)
-	      fetchData.then((json) => afficher(json));
+	      afficher(data);
       });
     });
 	} 
