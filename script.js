@@ -89,6 +89,12 @@ window.addEventListener('appinstalled', e => {
 	console.log('application installée') ; 
 }) ;
 
+window.addEventListener('online', (e) => {
+  if(Notification.permission === "granted"){
+    registerBackgroundSync();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
 	if (navigator.onLine) {
 	document.querySelector(".notification").setAttribute("hidden", "");
@@ -113,3 +119,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	fetchData.then((json) => afficher(json));
 });
+
+async function registerBackgroundSync() {
+  if (!navigator.serviceWorker) {
+    return console.error("Service Worker not supported");
+  }
+
+  navigator.serviceWorker.ready
+    .then(registration => { await registration.sync.register("syncAttendees")
+    console.log(registration.sync.register("syncAttendees"));
+  })
+    .then((res) => console.log("Registered background sync <!> :", res))
+    .catch(err => console.error("Error registering background sync", err));
+
+}
+
+function putFavorite(){
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjAxMjg1MDg0Mjg5NTUwMGJhYTMwNTFkIiwicHNldWRvIjoic2NvdHQifSwiaWF0IjoxNjExODI2NTc1LCJleHAiOjE2MTE4MzczNzV9.OVqz5x3MEX8kaHd5r3L71STWhnX7d5bYjrAsgzB3Aso");
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({"favorite":[]});
+
+  var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("localhost:8080/user", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+}

@@ -2,6 +2,17 @@ self.addEventListener("fetch", event => {
 	console.log(event.request.url);
 });
 
+self.addEventListener('favorites', function(event){
+  var data = JSON.parse(event.data);
+
+  console.log("SW Received Message:");
+  console.log(data);
+
+  self.userID = data.uid;
+  self.userToken = data.token;
+
+});
+
 self.addEventListener("fetch", (event) => {
   const url = event.request.url;
 
@@ -51,19 +62,27 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener("sync", function(event) {
-  console.log("sync event", event);
   if (event.tag === "syncAttendees") {
-    event.waitUntil(syncAttendees()); // on lance la requête de synchronisation
+    event.waitUntil(syncAttendees().then(res => {
+      console.log("res : ", res);
+  })); // on lance la requête de synchronisation
   }
 });
 
-function syncAttendees() {
+async function syncAttendees() {
   // todo url de notre serveur NodeJS
-  return update({ url: `https://reqres.in/api/users` })
-    .then(refresh)
-    .then(attendees =>
-      self.registration.showNotification(
-        `${attendees.length} attendees to the PWA Workshop`
-      )
-    );
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjAxMjg1MDg0Mjg5NTUwMGJhYTMwNTFkIiwicHNldWRvIjoic2NvdHQifSwiaWF0IjoxNjExODM3OTU5LCJleHAiOjE2MTE4NDg3NTl9.Z8_X-AmRIbKjd_qGRtDHrPSCnpwZmq2SR4SLs--YGjw");
+  
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  const responce = await fetch("http://localhost:8080/user/favorites", requestOptions)
+    .then(response =>  response.text())
+    .catch(error => console.log('error', error));
+
+  return responce
 }
