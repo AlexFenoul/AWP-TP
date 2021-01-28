@@ -1,11 +1,11 @@
 # TP de Web Mobile: Introduction au PWA
 
-- Tardieu Nicolas
-- Baratgin Léo
-- Gaston Antoine
-- Fenoul Alexandre
+-   Tardieu Nicolas
+-   Baratgin Léo
+-   Gaston Antoine
+-   Fenoul Alexandre
 
-## Authentification 
+## Authentification
 
 Utilisateur test :
 
@@ -13,10 +13,9 @@ Utilisateur test :
 
 ### `Password : test123`
 
-## URL du projet 
+## URL du projet
 
 ### `TODO : URL NETLIFY`
-
 
 ## Liens
 

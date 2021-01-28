@@ -18,7 +18,7 @@ function afficher(json){
     selection.forEach(repo => {
       html += `
             <div class="column">
-            <div class="card">
+            <div class="card grow">
               <div class="card-image">
                 <figure class="image is-4by3">
                   <img
@@ -89,6 +89,12 @@ window.addEventListener('appinstalled', e => {
 	console.log('application installée') ; 
 }) ;
 
+window.addEventListener('online', (e) => {
+  if(Notification.permission === "granted"){
+    registerBackgroundSync();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", function () {
 	if (navigator.onLine) {
 	document.querySelector(".notification").setAttribute("hidden", "");
@@ -113,3 +119,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	fetchData.then((json) => afficher(json));
 });
+
+function registerBackgroundSync() {
+  if (!navigator.serviceWorker) {
+    return console.error("Service Worker not supported");
+  }
+
+  navigator.serviceWorker.ready
+    .then(registration => {  registration.sync.register("syncAttendees")})
+    .catch(err => console.error("Error registering background sync", err));
+
+}
+
+function putFavorite(){
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjAxMjg1MDg0Mjg5NTUwMGJhYTMwNTFkIiwicHNldWRvIjoic2NvdHQifSwiaWF0IjoxNjExODI2NTc1LCJleHAiOjE2MTE4MzczNzV9.OVqz5x3MEX8kaHd5r3L71STWhnX7d5bYjrAsgzB3Aso");
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({"favorite":[]});
+
+  var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("localhost:8080/user", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+}

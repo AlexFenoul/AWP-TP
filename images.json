@@ -37,5 +37,14 @@
 		"created_at": "2018-10-08T10:58:58Z",
 		"updated_at": "2020-10-09T12:09:56Z",
 		"url": "https://static-cse.canva.com/blob/188563/nombre-dor-image02.png"
+	},
+
+	{
+		"name": "Image 6",        
+		"description": "Photo",
+		"created_at": "2020-10-09T12:09:56Z",
+		"updated_at": "2020-10-09T12:09:56Z",
+		"url": "https://static-cse.canva.com/blob/188563/nombre-dor-image02.png"
 	}
+
 ]
