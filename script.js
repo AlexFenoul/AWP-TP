@@ -1,3 +1,7 @@
+if(!localforage.getItem("token")){
+  window.location.replace("https://awp-tp.netlify.app/login");
+}
+
 function reduireArray(array, size) {
   if (array.length <= size) {
     return [array];
