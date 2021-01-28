@@ -113,14 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let fetchData;
 	if (navigator.onLine) {
-		fetchData = fetch("./images.json")
+    var myHeaders = new Headers(); 
+    myHeaders.append("Authorization", localforage.getItem("token") );
+    myHeaders.append("Content-Type", "application/json");
+  
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };  
+
+		fetchData = fetch("localhost:8080/images", requestOptions)
 		  .then((response) => response.json())
-		  .then((data) => localforage.setItem("data", data));
+		  .then((data) => {
+        console.log(data)
+        localforage.setItem("data", data)
+      });
 	} 
 	else {
 		fetchData = localforage.getItem("data");
 	}
-
 	fetchData.then((json) => afficher(json));
 });
 
@@ -128,11 +140,9 @@ function registerBackgroundSync() {
   if (!navigator.serviceWorker) {
     return console.error("Service Worker not supported");
   }
-
   navigator.serviceWorker.ready
     .then(registration => {  registration.sync.register("syncAttendees")})
     .catch(err => console.error("Error registering background sync", err));
-
 }
 
 function putFavorite(){
