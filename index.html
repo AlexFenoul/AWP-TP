@@ -1,57 +1,81 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AWP TP</title>
-    <link rel="manifest" href="manifest.webmanifest" />
-	<link rel="apple-touch-icon" href="/icon-192x192.png">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js"></script>
-    <script
-      async
-      src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js"
-      integrity="sha384-VcI6S+HIsE80FVM1jgbd6WDFhzKYA0PecD/LcIyMQpT4fMJdijBh0I7Iblaacawc"
-      crossorigin="anonymous"
-    ></script>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>AWP TP</title>
+        <link rel="manifest" href="manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js"></script>
+        <script
+            async
+            src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js"
+            integrity="sha384-VcI6S+HIsE80FVM1jgbd6WDFhzKYA0PecD/LcIyMQpT4fMJdijBh0I7Iblaacawc"
+            crossorigin="anonymous"
+        ></script>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.css"
-      rel="stylesheet"
-    />
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("/sw.js",{updateViaCache: 'none'})
-          .then((reg) => {
-            console.log("Votre service worker a été enregistré!");
-			reg.addEventListener('updatefound', () => { 
-				const installing = reg.installing;
-				installing.addEventListener('statechange', () => { 
-				if(installing.state === 'installed'){ 
-					 // Afficher un message aux utilisateurs 
-					 console.log("Votre service worker a été mis à jour! Veuillez rafraîchir la page"); 
-				} 
-			}); 
-			});
-		  
-		  })
-          .catch((error) => {
-            console.error(error);
-          });
-      } else {
-        console.warn("Service workers are not supported.");
-      }
-    </script>
+        <link href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.css" rel="stylesheet" />
+        <link href="style.css" rel="stylesheet" />
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('/sw.js', { updateViaCache: 'none' })
+                    .then((reg) => {
+                        console.log('Votre service worker a été enregistré!')
+                        reg.addEventListener('updatefound', () => {
+                            const installing = reg.installing
+                            installing.addEventListener('statechange', () => {
+                                if (installing.state === 'installed') {
+                                    // Afficher un message aux utilisateurs
+                                    console.log(
+                                        'Votre service worker a été mis à jour! Veuillez rafraîchir la page'
+                                    )
+                                }
+                            })
+                        })
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    })
+            } else {
+                console.warn('Service workers are not supported.')
+            }
+            if (!('Notification' in window)) {
+            alert('Ce navigateur ne prend pas en charge la notification de bureau')
+            }
+            else {
+              Notification.requestPermission(permission => {
+                if (permission === "granted") {
+                  console.log("registerBackgroundSync: true"); 
+                } else console.error("<!> Permission was not granted <!>");
+              });
+            }
+        </script>
 
-    <script src="./script.js"></script>
-  </head>
-  <body>
-    <div class="notification is-danger">
-      Vous êtes hors ligne.
-    </div>
-	<button id="boutton" class="button">
-      Installer
-    </button>
-    <h1 class="title">Galerie</h1>
-    <div class="container"></div>
-  </body>
+        <script src="./script.js"></script>
+    </head>
+    <body>
+        <div class="global-wrapper">
+            <div class="side">
+                <div class="side-content">
+                    <h2>N'oubliez pas d'installer notre application !</h2>
+                    <div class="download-app">
+                        <button id="boutton" class="button">Installer</button>
+                    </div>
+                    <hr />
+                    <h2>Membres du groupe :</h2>
+                    <ul>
+                        <li>Fenoul Alexandre</li>
+                        <li>Tardieu Nicolas</li>
+                        <li>Baratgin Léo</li>
+                        <li>Gaston Antoine</li>
+                        <li>Peron Nicolas</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container">
+                <div class="notification is-danger">Vous êtes hors ligne.</div>
+                <h1 class="title">Galerie</h1>
+            </div>
+        </div>
+    </body>
 </html>

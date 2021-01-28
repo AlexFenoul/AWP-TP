@@ -49,3 +49,30 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
+
+self.addEventListener("sync", function(event) {
+  if (event.tag === "syncAttendees") {
+    event.waitUntil(syncAttendees().then(res => {
+      console.log("res async : ", res);
+  })); // on lance la requête de synchronisation
+  }
+});
+
+async function syncAttendees() {
+  // todo url de notre serveur NodeJS
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjAxMjg1MDg0Mjg5NTUwMGJhYTMwNTFkIiwicHNldWRvIjoic2NvdHQifSwiaWF0IjoxNjExODM3OTU5LCJleHAiOjE2MTE4NDg3NTl9.Z8_X-AmRIbKjd_qGRtDHrPSCnpwZmq2SR4SLs--YGjw");
+
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  const responce = await fetch("http://localhost:8080/user/favorites", requestOptions)
+    .then(response =>  response.text())
+    .catch(error => console.log('error', error));
+
+  return responce
+}
