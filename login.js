@@ -20,7 +20,7 @@ function login(){
       .then(response => response.text())
       .then((data) => {
         localforage.setItem("token", data.access_token)
-        window.location.replace("http://localhost:8080/index.html");
+        window.location.replace("https://awp-tp.netlify.app/");
       })
       .catch(error => console.log('error', error));
   }
