@@ -32,6 +32,15 @@ hr{
     box-shadow: 10px 10px 20px 0px  rgba(28,28,28,1);
 }
 
+.global-wrapper #boutton:hover {
+    background-color: rgb(255, 97, 6);
+    color: white;
+    box-shadow: none;
+
+    transition: all .1s ease-in-out;
+    
+}
+
 .global-wrapper .side .side-content .download-app{
     text-align: center;
     margin: 30px auto;
@@ -62,6 +71,23 @@ hr{
     -webkit-box-shadow: 10px 10px 20px 0px rgba(28,28,28,1);
     -moz-box-shadow: 10px 10px 20px 0px rgba(28,28,28,1);
     box-shadow: 10px 10px 20px 0px  rgba(28,28,28,1);
+
+    transition: all .2s ease-in-out;
+    -webkit-animation: bounce-in-top 1.2s both;
+    animation: bounce-in-top 1.2s both;
+}
+
+.global-wrapper .container .card:hover{
+    background-color: lightgrey;
+    transform: scale(1.1);
+}
+
+.global-wrapper .container .card:hover .content{
+    color: grey;
+}
+
+.global-wrapper .container .card:hover time{
+    color: rgb(255, 97, 6);
 }
 
 /* .global-wrapper .container .column:nth-child(even){

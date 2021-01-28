@@ -18,7 +18,7 @@ function afficher(json){
     selection.forEach(repo => {
       html += `
             <div class="column">
-            <div class="card">
+            <div class="card grow">
               <div class="card-image">
                 <figure class="image is-4by3">
                   <img
