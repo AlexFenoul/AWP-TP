@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Login Page</title>
+        <link rel="manifest" href="manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js"></script>
+        <script
+            async
+            src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js"
+            integrity="sha384-VcI6S+HIsE80FVM1jgbd6WDFhzKYA0PecD/LcIyMQpT4fMJdijBh0I7Iblaacawc"
+            crossorigin="anonymous"
+        ></script>
+        <link href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.css" rel="stylesheet" />
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="main">
+            <div class="form-wrapper">
+                <h1 class="title">Connexion</h1>
+                <div class="form-item">
+                    <p class="form-label">Pseudo</p>
+                    <input
+                        type="pseudo"
+                        name="pseudo"
+                        id="pseudo"
+                        class="form-style"
+                        autocomplete="off"
+                    />
+                </div>
+                <div class="form-item">
+                    <p class="form-label">Mot de Passe</p>
+                    <input type="password" name="password" id="password" class="form-style" />
+                </div>
+                <div class="validate">
+                    <button class="button" class="button">Valider</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
