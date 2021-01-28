@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	else {
 		fetchData = localforage.getItem("data");
 	}
-	fetchData.then((json) => afficher(json));
+	// fetchData.then((json) => afficher(json));
 });
 
 function registerBackgroundSync() {
