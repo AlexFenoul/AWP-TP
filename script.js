@@ -123,23 +123,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let fetchData;
 	if (navigator.onLine) {
-    var token = localforage.getItem("token")
-    var myHeaders = new Headers(); 
-    myHeaders.append("Authorization", token );
-    myHeaders.append("Content-Type", "application/json");
-  
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };  
+    localforage.getItem('token', function(err, value) {
+      var myHeaders = new Headers(); 
+      myHeaders.append("Authorization", value );
+      myHeaders.append("Content-Type", "application/json");
 
-		fetchData = fetch("http://localhost:8080/image", requestOptions)
-		  .then((response) => response.json())
-		  .then((data) => {
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };  
+      
+      fetchData = fetch("http://localhost:8080/image", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data)
         localforage.setItem("data", data)
       });
+    });
 	} 
 	else {
 		fetchData = localforage.getItem("data");
