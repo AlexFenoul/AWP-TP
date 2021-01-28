@@ -17,6 +17,11 @@ function login(){
     };
   
     fetch("http://localhost:8080/auth/login", requestOptions)
-      .then(result => console.log(result))
+      .then(response => response.text())
+      .then((data) => {
+        localforage.setItem("token", data.access_token)
+        window.location.replace("http://localhost:8080/index.html");
+      })
       .catch(error => console.log('error', error));
   }
+  (data) => localforage.setItem("data", data)
