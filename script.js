@@ -123,8 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let fetchData;
 	if (navigator.onLine) {
+    var token = localforage.getItem("token")
     var myHeaders = new Headers(); 
-    myHeaders.append("Authorization", localforage.getItem("token") );
+    myHeaders.append("Authorization", token );
     myHeaders.append("Content-Type", "application/json");
   
     var requestOptions = {
@@ -156,8 +157,9 @@ function registerBackgroundSync() {
 }
 
 function putFavorite(){
+  var token = localforage.getItem("token")
   var myHeaders = new Headers(); 
-  myHeaders.append("Authorization", localforage.getItem("token") );
+  myHeaders.append("Authorization", token );
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({"favorite":[]});
