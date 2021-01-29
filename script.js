@@ -13,14 +13,16 @@ const dateTimeFormat = Intl.DateTimeFormat("fr");
 
 function afficher(json){
   console.log(json)
-	const selections = reduireArray(json, 4);
+	const selections = json
 
   let html = "";
 
   selections.forEach(selection => {
     html += '<div class="columns">';
-
+    console.log("selection", selection)
     selection.forEach(repo => {
+    console.log("repo", repo)
+
       html += `
             <div class="column">
             <div class="card grow">
