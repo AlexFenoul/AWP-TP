@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
       afficher(data);
     });
 });
+});
 
 window.addEventListener('beforeinstallprompt', e => { 
   e.preventDefault() ; 
