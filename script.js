@@ -35,7 +35,7 @@ function afficher(json){
                   <div class="media-left">
                     <figure class="image is-48x48">
                       <img
-                        src="https://giffiles.alphacoders.com/981/98174.gif"
+                        src="https://via.placeholder.com/30"
                         alt="Placeholder image"
                       />
                     </figure>
