@@ -19,17 +19,13 @@ function afficher(json){
 
   selections.forEach(selection => {
     html += '<div class="columns">';
-    console.log("selection", selection)
-    selection.forEach(repo => {
-    console.log("repo", repo)
-
       html += `
             <div class="column">
             <div class="card grow">
               <div class="card-image">
                 <figure class="image is-4by3">
                   <img
-                    src="${repo.url}"
+                    src="${selection.url}"
                     alt="Placeholder image"
                   />
                 </figure>
@@ -45,22 +41,18 @@ function afficher(json){
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="title is-4">${repo.name}</p>
+                    <p class="title is-4">${selection.name}</p>
                     <p class="subtitle is-6">@Parcourir</p>
                   </div>
                 </div>
   
                 <div class="content">
-                   ${repo.description}
+                   ${selection.description}
                   <br />
-                  Dernière mise à jour: <time datetime="${
-                    repo.updated_at
-                  }">${dateTimeFormat.format(new Date(repo.updated_at))}</time>
                 </div>
               </div>
             </div>
           </div>`;
-    });
     html += "</div>";
   });
 
