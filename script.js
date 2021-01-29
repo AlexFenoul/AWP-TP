@@ -42,7 +42,6 @@ function afficher(json){
                   </div>
                   <div class="media-content">
                     <p class="title is-4">${selection.name}</p>
-                    <p class="subtitle is-6">@Parcourir</p>
                   </div>
                 </div>
   
@@ -60,19 +59,23 @@ function afficher(json){
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  var myHeaders = new Headers(); 
-  myHeaders.append("Authorization", localforage.getItem("token") );
-  myHeaders.append("Content-Type", "application/json");
+  localforage.getItem('token', function(err, value) {
+    var myHeaders = new Headers(); 
+    myHeaders.append("Authorization", value );
+    myHeaders.append("Content-Type", "application/json");
 
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };  
-
-  fetch("http://localhost:8080/image", requestOptions)
-  .then((response) => response.json())
-  .then((json) => afficher(json)); 
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };  
+    
+    fetch("http://localhost:8080/image", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      localforage.setItem("data", data)
+      afficher(data);
+    });
 });
 
 window.addEventListener('beforeinstallprompt', e => { 
